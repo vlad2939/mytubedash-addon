@@ -57,15 +57,7 @@ function renderSidebar() {
 }
 
 function renderHome() {
-    const main = document.getElementById('app-content');
-    main.innerHTML = `
-        <div class="text-center max-w-lg mt-24">
-            <span class="material-icons text-[80px] text-red-600 mb-6 block">play_circle</span>
-            <h2 class="text-3xl font-bold mb-3 tracking-tight">MyTube Dash</h2>
-            <p class="text-zinc-400 mb-8 font-light text-lg">Versiunea 100% nativă, pură. Fără algoritmi, fără Angular. Doar tu și controlul tău absolut.</p>
-            <button onclick="renderSettings()" class="bg-white hover:bg-zinc-200 text-black font-semibold py-3 px-8 rounded-full transition shadow-lg">Incepe Configurarea</button>
-        </div>
-    `;
+    renderSettings();
 }
 
 function renderPlaylist(id) {
@@ -91,7 +83,7 @@ function renderPlaylist(id) {
     } else {
         vids.forEach(v => {
             html += `
-            <div class="bg-zinc-900 border border-zinc-800 flex flex-col rounded-xl overflow-hidden group cursor-pointer hover:border-zinc-500 transition shadow-sm" onclick="playVideo('${v.youtubeId}')">
+            <div class="bg-zinc-900 border border-zinc-800 flex flex-col rounded-xl overflow-hidden group cursor-pointer hover:border-zinc-500 transition shadow-sm" onclick="playVideo('${v.youtubeId}', '${pl.id}')">
                 <div class="aspect-video relative bg-black w-full">
                     <img src="${v.thumbnail}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
                     <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
@@ -110,11 +102,11 @@ function renderPlaylist(id) {
     main.innerHTML = html;
 }
 
-function playVideo(ytId) {
+function playVideo(ytId, plId) {
      const main = document.getElementById('app-content');
      main.innerHTML = `
         <div class="w-full max-w-[1200px] flex flex-col mx-auto mt-4 h-[80vh] min-h-[500px]">
-             <button onclick="renderHome()" class="self-start flex items-center justify-center gap-2 text-zinc-400 hover:text-white mb-6 transition px-2 py-1 rounded hover:bg-zinc-800">
+             <button onclick="renderPlaylist('${plId}')" class="self-start flex items-center justify-center gap-2 text-zinc-400 hover:text-white mb-6 transition px-2 py-1 rounded hover:bg-zinc-800">
                  <span class="material-icons text-lg">arrow_back</span> Înapoi
              </button>
              <div class="w-full h-full bg-black rounded-2xl overflow-hidden shadow-2xl border border-zinc-800">
@@ -148,8 +140,7 @@ function renderSettings() {
     });
 
     main.innerHTML = `
-        <div class="w-full max-w-3xl mx-auto flex flex-col mt-8">
-            <h2 class="text-2xl font-bold tracking-tight mb-8">Administrare Conținut</h2>
+        <div class="w-full max-w-3xl mx-auto flex flex-col mt-4">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Coloana 1: Adauga Playlist -->
@@ -189,16 +180,35 @@ function renderSettings() {
                             <label class="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Cum i se spune?</label>
                             <input type="text" id="vid-title" placeholder="Ex: Melodia perfectă" class="w-full bg-[#0a0a0a] border border-zinc-700 rounded-lg px-4 py-2.5 text-white outline-none focus:border-red-500 text-sm">
                         </div>
-                        <button onclick="addVideo()" class="w-full bg-red-600 hover:bg-red-700 font-semibold py-3 rounded-lg transition text-white mt-4 shadow-lg shadow-red-900/20">Salvează Clipeala</button>
+                        <button onclick="addVideo()" class="w-full bg-red-600 hover:bg-red-700 font-semibold py-3 rounded-lg transition text-white mt-4 shadow-lg shadow-red-900/20">Salvează</button>
                     </div>
                 </div>
             </div>
             
             <div class="mt-12 text-center pt-8 border-t border-zinc-800">
-                <button onclick="clearSystem()" class="text-xs font-medium text-zinc-500 hover:text-red-500 hover:underline transition">Atenție: Ștergere absolută a tuturor datelor (Resetare totală din local storage)</button>
+                <div onclick="openReadmePopup()" class="text-xs text-zinc-500 hover:text-zinc-400 cursor-pointer select-none">@ concept si realizare vlad 39</div>
             </div>
         </div>
     `;
+}
+
+function openReadmePopup() {
+    const modal = document.getElementById('readme-modal');
+    const content = document.getElementById('readme-content');
+    modal.classList.remove('hidden');
+    
+    fetch('README.md')
+        .then(response => response.text())
+        .then(text => {
+            content.innerHTML = marked.parse(text);
+        })
+        .catch(err => {
+            content.innerHTML = '<p class="text-red-500">Nu se poste încărca fisierul README.md</p>';
+        });
+}
+
+function closeReadmePopup() {
+    document.getElementById('readme-modal').classList.add('hidden');
 }
 
 // ----- ACȚIUNI DIN USER INPUT -----
@@ -267,14 +277,7 @@ function addVideo() {
     renderPlaylist(plId); // Du-mă direct la el
 }
 
-function clearSystem() {
-    if(confirm('Această acțiune nu poate fi ștearsă! Esti sigur?')) {
-        localStorage.removeItem(DB_KEY);
-        location.reload();
-    }
-}
-
 // ----- INITIALIZARE -----
 loadData();
 renderSidebar();
-renderHome();
+renderSettings();

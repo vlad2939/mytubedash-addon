@@ -6,7 +6,8 @@
     <!-- Fără tag-uri dinamice. Fără <base>. Doar legături pur relative -> "style.css" -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         // Setare culori Tailwind via link CDN
         tailwind.config = {
@@ -20,7 +21,7 @@
 <body class="bg-[#0a0a0a] text-white flex h-screen overflow-hidden antialiased">
     <!-- Meniu Lateral (Sidebar) -->
     <aside class="w-64 bg-black border-r border-zinc-800 flex flex-col shrink-0">
-        <div class="p-4 flex items-center justify-between border-b border-zinc-800 cursor-pointer" onclick="renderHome()">
+        <div class="p-4 flex items-center justify-between border-b border-zinc-800 cursor-pointer" onclick="renderSettings()">
             <div class="flex items-center gap-2 font-bold text-lg text-white">
                 <span class="material-icons text-red-600">play_circle</span>
                 MyTube Dash
@@ -42,6 +43,16 @@
     <main id="app-content" class="flex-1 flex flex-col items-center justify-start bg-[#0a0a0a] custom-scrollbar overflow-y-auto w-full p-6">
         <!-- Tot conținutul este injectat de Javascript aici -->
     </main>
+
+    <!-- Modal pentru README -->
+    <div id="readme-modal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center p-4" onclick="closeReadmePopup()">
+        <div class="bg-zinc-900 border border-zinc-700 rounded-xl w-full max-w-3xl max-h-[80vh] flex flex-col shadow-2xl" onclick="event.stopPropagation()">
+            <div class="flex justify-end p-3 border-b border-zinc-800">
+                <button onclick="closeReadmePopup()" class="text-zinc-400 hover:text-white transition"><span class="material-icons">close</span></button>
+            </div>
+            <div id="readme-content" class="p-8 overflow-y-auto prose prose-invert prose-zinc max-w-none text-sm custom-scrollbar text-zinc-300"></div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
