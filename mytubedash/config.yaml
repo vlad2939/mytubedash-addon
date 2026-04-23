@@ -1,5 +1,5 @@
 name: "MyTube Dash"
-version: "1.0.1"
+version: "1.0.2"
 slug: "mytubedash"
 description: "Dashboard personal pentru vizionarea clipurilor YouTube fără algoritmi."
 arch:
