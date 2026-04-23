@@ -55,4 +55,4 @@ Metoda:
 
 ---
 
-**@**concept și realizare *vlad39*
+**@** concept și realizare *vlad39*
