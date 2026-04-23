@@ -2,7 +2,7 @@
 
 > **Dashboard personal pentru vizionarea clipurilor YouTube.**
 
-![Versiune](https://img.shields.io/badge/versiune-2.0.0-blue.svg)
+![Versiune](https://img.shields.io/badge/versiune-2.0.5-blue.svg)
 ![Arhitectura](https://img.shields.io/badge/arhitectură-Vanilla_JS_|_NGINX-red.svg)
 ![Setup](https://img.shields.io/badge/platformă-Home_Assistant_Add--on-03A9F4.svg)
 
