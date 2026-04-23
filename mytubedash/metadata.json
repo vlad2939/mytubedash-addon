@@ -1,0 +1,6 @@
+{
+  "name": "MyTube Dash",
+  "description": "Personal Video Dashboard (PVD) for YouTube videos without algorithms.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

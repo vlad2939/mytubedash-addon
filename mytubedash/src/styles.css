@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+/* 
+ * Configurarea pentru Dark Mode bazată pe clasa .dark aplicată pe elementul <html>.
+ * Setăm variabile CSS pentru culori pentru a oferi suport fluid la schimbarea temei.
+ */
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  /* Ascunderea permanentă a scrollbar-ului, dar păstrarea funcționalității de scroll */
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE și Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari și Opera */
+  }
+
+  /* Scrollbar personalizat și subtil pentru zonele în care e necesar */
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-400/50 rounded-full dark:bg-gray-600/50 hover:bg-gray-400 dark:hover:bg-gray-600 transition-colors;
+  }
+}
+
+/* Stiluri de bază direct pentru elementele HTML */
+body {
+  @apply bg-zinc-50 text-zinc-900 transition-colors duration-300 dark:bg-[#0a0a0a] dark:text-white;
+  font-family: var(--font-sans);
+}

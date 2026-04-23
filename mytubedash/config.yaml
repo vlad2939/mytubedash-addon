@@ -1,0 +1,14 @@
+name: "MyTube Dash"
+version: "1.0.0"
+slug: "mytubedash"
+description: "Dashboard personal pentru vizionarea clipurilor YouTube fără algoritmi."
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+webui: "http://[HOST]:[PORT:3000]/"
+ports:
+  3000/tcp: 3000
+panel_icon: mdi:youtube
+panel_title: "MyTube Dash"
