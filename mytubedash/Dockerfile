@@ -16,11 +16,8 @@ COPY . .
 # Compilam aplicatia pentru o afisare ultra-rapida (SPA)
 RUN npm run build -- --configuration production
 
-# Instalam rapid un server static ("serve") pentru a arata pagina spre exterior
-RUN npm install -g serve
-
 # Deschidem portul 3000
 EXPOSE 3000
 
 # Ce comanda se da efectiv cand dai "Start" la Add-on
-CMD ["serve", "-s", "dist/app/browser", "-l", "3000"]
+CMD ["node", "ha-server.js"]
