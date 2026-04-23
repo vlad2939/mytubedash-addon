@@ -1,6 +1,6 @@
 # 📺 MyTube Dash
 
-> **Dashboard personal pentru vizionarea clipurilor YouTube. Fără algoritmi, fără notificări, 100% control.**
+> **Dashboard personal pentru vizionarea clipurilor YouTube.**
 
 ![Versiune](https://img.shields.io/badge/versiune-2.0.0-blue.svg)
 ![Arhitectura](https://img.shields.io/badge/arhitectură-Vanilla_JS_|_NGINX-red.svg)
@@ -20,9 +20,8 @@ MyTube Dash este o aplicație web nativă (Single Page Application) gândită sp
 
 ---
 
-## 🛠️ Detalii Tehnice (Vanilla Edition v2.0.0)
+## 🛠️ Detalii Tehnice (Vanilla Edition v2.0.5)
 
-După mai multe tranziții arhitecturale pentru a fuziona impecabil cu restricțiile **Ingress CSP** din Home Assistant, aplicația a fost redusă la nivelul ei fundamental. 
 Baza arhitecturii:
 *   Fără rețele complexe Node.js / NPM / Angular.
 *   **Frontend-ul** este scris în **HTML pur, Tailwind (CDN) și Vanilla JavaScript**. 
@@ -56,4 +55,4 @@ Metoda:
 
 ---
 
-**Autor:** *vlad39* (Conceput, structurat și readus la viață)
+**@**concept și realizare *vlad39*
