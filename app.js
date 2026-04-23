@@ -177,7 +177,7 @@ function renderSettings() {
                             <div class="hidden mt-3 text-center" id="vid-thumb-preview"></div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Cum i se spune?</label>
+                            <label class="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Titlu</label>
                             <input type="text" id="vid-title" placeholder="Ex: Melodia perfectă" class="w-full bg-[#0a0a0a] border border-zinc-700 rounded-lg px-4 py-2.5 text-white outline-none focus:border-red-500 text-sm">
                         </div>
                         <button onclick="addVideo()" class="w-full bg-red-600 hover:bg-red-700 font-semibold py-3 rounded-lg transition text-white mt-4 shadow-lg shadow-red-900/20">Salvează</button>
@@ -186,7 +186,7 @@ function renderSettings() {
             </div>
             
             <div class="mt-12 text-center pt-8 border-t border-zinc-800">
-                <div onclick="openReadmePopup()" class="text-xs text-zinc-500 hover:text-zinc-400 cursor-pointer select-none">@ concept si realizare vlad 39</div>
+                <div onclick="openReadmePopup()" class="text-xs text-zinc-500 hover:text-zinc-400 cursor-pointer select-none">@ concept și realizare vlad 39</div>
             </div>
         </div>
     `;
