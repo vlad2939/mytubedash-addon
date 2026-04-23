@@ -1,5 +1,5 @@
 name: "MyTube Dash"
-version: "1.0.0"
+version: "1.0.1"
 slug: "mytubedash"
 description: "Dashboard personal pentru vizionarea clipurilor YouTube fără algoritmi."
 arch:
@@ -7,8 +7,7 @@ arch:
   - aarch64
 startup: application
 boot: auto
-webui: "http://[HOST]:[PORT:3000]/"
-ports:
-  3000/tcp: 3000
+ingress: true
+ingress_port: 3000
 panel_icon: mdi:youtube
 panel_title: "MyTube Dash"
