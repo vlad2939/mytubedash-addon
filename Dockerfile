@@ -7,8 +7,8 @@ RUN sed -i 's/listen  *80;/listen 3000;/g' /etc/nginx/conf.d/default.conf
 # Ștergem ce avea NGINX din fabrica in folder
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copiem doar cele 3 fisiere magice pure create
-COPY index.html style.css app.js /usr/share/nginx/html/
+# Copiem doar fisierele create
+COPY index.html style.css app.js README.md /usr/share/nginx/html/
 
 # Port exposure
 EXPOSE 3000

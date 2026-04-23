@@ -280,4 +280,8 @@ function addVideo() {
 // ----- INITIALIZARE -----
 loadData();
 renderSidebar();
-renderSettings();
+if (store.playlists && store.playlists.length > 0) {
+    renderPlaylist(store.playlists[0].id);
+} else {
+    renderSettings();
+}
