@@ -29,10 +29,15 @@ function genId() {
     return Math.random().toString(36).substr(2, 9);
 }
 
-// Citire ID videoclip din URL-uri complexe de Youtube
-function parseYT(url) {
-    const regExp = /(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-    const match = url.match(regExp);
+// Citire ID videoclip din orice format (URL, iframe, sau doar id-ul)
+function parseYT(input) {
+    if (!input) return null;
+    const cleanInput = input.trim();
+    // Dacă a introdus exact cele 11 caractere ale ID-ului
+    if (/^[a-zA-Z0-9_-]{11}$/.test(cleanInput)) return cleanInput;
+    // Extras din orice tip de URL sau iFrame (embed, watch, youtu.be, etc)
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+    const match = cleanInput.match(regex);
     return match ? match[1] : null;
 }
 
@@ -108,12 +113,19 @@ function renderPlaylist(id) {
 function playVideo(ytId) {
      const main = document.getElementById('app-content');
      main.innerHTML = `
-        <div class="w-full max-w-[1200px] flex flex-col mx-auto mt-4">
+        <div class="w-full max-w-[1200px] flex flex-col mx-auto mt-4 h-[80vh] min-h-[500px]">
              <button onclick="renderHome()" class="self-start flex items-center justify-center gap-2 text-zinc-400 hover:text-white mb-6 transition px-2 py-1 rounded hover:bg-zinc-800">
                  <span class="material-icons text-lg">arrow_back</span> Înapoi
              </button>
-             <div class="w-full relative bg-black rounded-2xl overflow-hidden shadow-2xl border border-zinc-800" style="padding-top: 56.25%;">
-                 <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             <div class="w-full h-full bg-black rounded-2xl overflow-hidden shadow-2xl border border-zinc-800">
+                 <iframe class="w-full h-full" 
+                         src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0" 
+                         title="YouTube video player" 
+                         frameborder="0" 
+                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                         referrerpolicy="strict-origin-when-cross-origin" 
+                         allowfullscreen>
+                 </iframe>
              </div>
         </div>
      `;
